@@ -1,4 +1,7 @@
 {
+  "name": "segment-tree-api",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
@@ -6,3 +9,4 @@
     "mongoose": "^8.0.0"
   }
 }
+
