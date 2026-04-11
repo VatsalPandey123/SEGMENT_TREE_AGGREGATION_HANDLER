@@ -49,8 +49,21 @@ async function compareHandler(l, r) {
   const segmentMinResult = segmentTreeService.queryMin(l, r);
   const segmentMaxResult = segmentTreeService.queryMax(l, r);
   const mongoResult = await mongoService.queryRange(l, r);
+  
+  // Return segment tree results even if MongoDB is unavailable
   if (!mongoResult.success) {
-    return { success: false, error: mongoResult.error };
+    return {
+      success: true,
+      range: [l, r],
+      segmentTree: {
+        sum: segmentSumResult.result,
+        min: segmentMinResult.result,
+        max: segmentMaxResult.result
+      },
+      mongoDB: null,
+      match: null,
+      warning: mongoResult.error
+    };
   }
 
   return {
