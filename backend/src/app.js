@@ -10,6 +10,17 @@ app.use(express.json());
 
 app.use('/api', routes);
 
+app.get('/api/debug', (req, res) => {
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'not set';
+  const masked = mongoUri === 'not set' ? 'not set' : mongoUri.substring(0, 20) + '...' + mongoUri.substring(mongoUri.length - 20);
+  res.json({
+    env_mongo_uri: process.env.MONGO_URI ? 'set' : 'not set',
+    env_mongodb_uri: process.env.MONGODB_URI ? 'set' : 'not set',
+    masked_uri: masked,
+    node_env: process.env.NODE_ENV
+  });
+});
+
 app.get('/', (req, res) => {
   res.json({
     message: 'Segment Tree Aggregation Handler API',
