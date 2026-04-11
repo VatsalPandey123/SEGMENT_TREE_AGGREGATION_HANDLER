@@ -382,36 +382,58 @@ function App() {
               <h3 style={{ margin: '0 0 15px 0', color: '#00ff88' }}>
                 Comparison for Range [{compareResult.range[0]}, {compareResult.range[1]}]
               </h3>
+              {compareResult.mongoDB === null ? (
+                <div style={{ padding: '15px', background: 'rgba(255, 200, 0, 0.1)', borderRadius: '8px', border: '1px solid rgba(255, 200, 0, 0.3)', marginBottom: '15px' }}>
+                  <p style={{ margin: 0, color: '#ffc800' }}>
+                    ⚠️ {compareResult.warning || 'MongoDB is not available'}
+                  </p>
+                  <p style={{ margin: '8px 0 0 0', fontSize: '0.9rem', color: '#888' }}>
+                    Showing Segment Tree results only
+                  </p>
+                </div>
+              ) : null}
               <div style={styles.grid}>
                 <div style={styles.statBox}>
                   <div style={{ fontSize: '0.9rem', color: '#aaa' }}>Sum</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                     {compareResult.segmentTree.sum}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#888' }}>MongoDB: {compareResult.mongoDB.sum}</div>
-                  <div style={compareResult.match.sum ? styles.compareMatch : styles.compareMismatch}>
-                    {compareResult.match.sum ? '✓ Match' : '✗ Mismatch'}
-                  </div>
+                  {compareResult.mongoDB && (
+                    <>
+                      <div style={{ fontSize: '0.8rem', color: '#888' }}>MongoDB: {compareResult.mongoDB.sum}</div>
+                      <div style={compareResult.match.sum ? styles.compareMatch : styles.compareMismatch}>
+                        {compareResult.match.sum ? '✓ Match' : '✗ Mismatch'}
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div style={styles.statBox}>
                   <div style={{ fontSize: '0.9rem', color: '#aaa' }}>Min</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                     {compareResult.segmentTree.min}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#888' }}>MongoDB: {compareResult.mongoDB.min}</div>
-                  <div style={compareResult.match.min ? styles.compareMatch : styles.compareMismatch}>
-                    {compareResult.match.min ? '✓ Match' : '✗ Mismatch'}
-                  </div>
+                  {compareResult.mongoDB && (
+                    <>
+                      <div style={{ fontSize: '0.8rem', color: '#888' }}>MongoDB: {compareResult.mongoDB.min}</div>
+                      <div style={compareResult.match.min ? styles.compareMatch : styles.compareMismatch}>
+                        {compareResult.match.min ? '✓ Match' : '✗ Mismatch'}
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div style={styles.statBox}>
                   <div style={{ fontSize: '0.9rem', color: '#aaa' }}>Max</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                     {compareResult.segmentTree.max}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#888' }}>MongoDB: {compareResult.mongoDB.max}</div>
-                  <div style={compareResult.match.max ? styles.compareMatch : styles.compareMismatch}>
-                    {compareResult.match.max ? '✓ Match' : '✗ Mismatch'}
-                  </div>
+                  {compareResult.mongoDB && (
+                    <>
+                      <div style={{ fontSize: '0.8rem', color: '#888' }}>MongoDB: {compareResult.mongoDB.max}</div>
+                      <div style={compareResult.match.max ? styles.compareMatch : styles.compareMismatch}>
+                        {compareResult.match.max ? '✓ Match' : '✗ Mismatch'}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
