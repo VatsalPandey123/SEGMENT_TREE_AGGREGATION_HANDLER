@@ -4,14 +4,13 @@ const connectDB = require('../backend/src/config/db');
 const mongoService = require('../backend/src/services/mongoService');
 const segmentTreeService = require('../backend/src/services/segmentTreeService');
 
-let mongoConnected = false;
 let initialized = false;
 
 async function initializeApp() {
   if (initialized) return;
   
   try {
-    mongoConnected = await connectDB();
+    const mongoConnected = await connectDB();
     
     if (mongoConnected) {
       const dbArray = await mongoService.getAll();
@@ -29,7 +28,12 @@ async function initializeApp() {
   }
 }
 
-// Initialize app before handling requests
-initializeApp();
+// Initialize on first request
+app.use(async (req, res, next) => {
+  if (!initialized) {
+    await initializeApp();
+  }
+  next();
+});
 
 module.exports = app;

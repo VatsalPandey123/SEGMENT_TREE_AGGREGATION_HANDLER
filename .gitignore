@@ -37,3 +37,5 @@ segment-tree-handler/
 .vercel/
 .output/
 .next/
+
+.vercel
