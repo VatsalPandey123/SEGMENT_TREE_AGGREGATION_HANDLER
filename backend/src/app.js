@@ -21,6 +21,29 @@ app.get('/api/debug', (req, res) => {
   });
 });
 
+app.get('/api/test-db', async (req, res) => {
+  const mongoose = require('mongoose');
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+  
+  try {
+    if (mongoose.connection.readyState === 1) {
+      return res.json({ status: 'connected', host: mongoose.connection.host });
+    }
+    
+    const conn = await mongoose.connect(mongoUri, {
+      connectTimeoutMS: 5000,
+      socketTimeoutMS: 5000
+    });
+    res.json({ status: 'connected', host: conn.connection.host });
+  } catch (error) {
+    res.status(500).json({ 
+      status: 'failed', 
+      error: error.message,
+      name: error.name 
+    });
+  }
+});
+
 app.get('/', (req, res) => {
   res.json({
     message: 'Segment Tree Aggregation Handler API',
