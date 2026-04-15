@@ -5,26 +5,38 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Segment Tree Handler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root {
+        --white: #ffffff;
+        --bg: #fafaf8;
+        --dark: #141210;
+        --dark2: #2a2825;
+        --muted: #78756e;
+        --faint: #b5b1aa;
+        --line: #e8e5df;
+        --orange: #e8620a;
+        --orange-light: #fff3eb;
+        --orange-mid: #fdd8bd;
       }
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
       body {
-        margin: 0;
-        background: #1a1a2e;
+        background: var(--bg);
+        color: var(--dark);
+        font-family: 'Outfit', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
       }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1a1a2e;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #00d9ff;
-        border-radius: 4px;
-      }
+      ::selection { background: var(--orange-mid); color: var(--dark); }
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button { -webkit-appearance: none; }
+      input[type=number] { -moz-appearance: textfield; }
+
+      @keyframes enter { from { opacity:0; transform:translateY(24px) } to { opacity:1; transform:translateY(0) } }
     </style>
   </head>
   <body>
