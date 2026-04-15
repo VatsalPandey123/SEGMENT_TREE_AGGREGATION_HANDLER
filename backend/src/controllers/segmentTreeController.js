@@ -22,6 +22,7 @@ async function updateHandler(l, r, val) {
 
   return { success: true };
 }
+// This handler sets the entire array and rebuilds the segment tree and MongoDB collection
 
 async function setArrayHandler(arr) {
   const segmentResult = segmentTreeService.setArray(arr);
@@ -39,7 +40,7 @@ async function setArrayHandler(arr) {
 
   return segmentResult;
 }
-
+// This handler compares the results of segment tree queries with MongoDB queries for the same range and returns a detailed report
 async function compareHandler(l, r) {
   const segmentSumResult = segmentTreeService.querySum(l, r);
   if (!segmentSumResult.success) {
@@ -87,6 +88,7 @@ async function compareHandler(l, r) {
     }
   };
 }
+// This handler returns the current state of the segment tree and MongoDB connection status, including any warnings if MongoDB is not connected
 
 function getStateHandler() {
   return {
@@ -108,6 +110,7 @@ async function resetHandler() {
 
   return result;
 }
+// This controller provides handlers for all segment tree operations, including querying, updating, setting the array, comparing results with MongoDB, getting the current state, and resetting the data. Each handler ensures that the segment tree and MongoDB remain in sync and provides detailed feedback on the operations performed.
 
 module.exports = {
   queryHandler,
